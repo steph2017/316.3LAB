@@ -68,8 +68,13 @@ function handleClick(event) {
   console.log(event.target);
 
   //active element toggle
-  topMenuLinks.forEach((link) => link.classList.remove("active"));
-  event.target.classList.toggle("active");
+  topMenuLinks.forEach((link) => {
+    if (link === event.target) {
+      link.classList.toggle("active");
+    } else {
+      link.classList.remove("active");
+    }
+  });
 }
 
 topMenuEl.addEventListener("click", handleClick);
