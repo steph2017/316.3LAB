@@ -28,4 +28,10 @@ menuLinks.forEach((link) => {
   topMenuEl.appendChild(anchor);
 });
 
-const subNav = document.createElement("nav");
+const subMenuEl = document.getElementById("sub-menu");
+subMenuEl.style.height = "100%"; //set menu height to 100%
+subMenuEl.style.backgroundColor = "var(--sub-menu-bg)"; // set color
+subMenuEl.classList.add("flex-around"); // add class
+subMenuEl.style.position = "Absolute"; // trying to hide the subMenuEl...
+subMenuEl.style.top = "0px"; //...by moving to top of page...
+subMenuEl.style.zIndex = "-1"; //...then setting z index
