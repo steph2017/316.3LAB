@@ -61,6 +61,9 @@ subMenuEl.style.top = "0px"; //...by moving to top of page...
 const topMenuLinks = topMenuEl.querySelectorAll("a");
 
 function handleClick(event) {
+  function subMenuBuilder(sublinkArr) {
+    //creating function in function
+  }
   event.preventDefault();
   if (event.target.tagName !== "A") {
     return;
@@ -70,7 +73,19 @@ function handleClick(event) {
   //active element toggle
   topMenuLinks.forEach((link) => {
     if (link === event.target) {
-      link.classList.toggle("active");
+      if (link.text === "about") {
+        subMenuEl.style.top = "0px";
+        link.classList.toggle("active");
+      } else {
+        if (link.classList.contains("active")) {
+          subMenuEl.style.top = "0px";
+          link.classList.toggle("active");
+        } else {
+          subMenuEl.style.top = "100%";
+          link.classList.toggle("active");
+          subMenuBuilder(link.subLinks);
+        }
+      }
     } else {
       link.classList.remove("active");
     }
