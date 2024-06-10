@@ -61,9 +61,6 @@ subMenuEl.style.top = "0px"; //...by moving to top of page...
 const topMenuLinks = topMenuEl.querySelectorAll("a");
 
 function handleClick(event) {
-  function subMenuBuilder(sublinkArr) {
-    //creating function in function
-  }
   event.preventDefault();
   if (event.target.tagName !== "A") {
     return;
@@ -72,6 +69,17 @@ function handleClick(event) {
 
   //active element toggle
   topMenuLinks.forEach((link) => {
+    //adding helper function here?
+    function subMenuBuilder(sublinkArr) {
+      //creating function in function
+      sublinkArr.forEach((sublink) => {
+        const subAnchor = subMenuEl.createElement("a");
+        subAnchor.setAttribute("href", sublink.href);
+        anchor.textContent = sublink.text;
+        subMenuEl.appendChild(subAnchor);
+      });
+    }
+
     if (link === event.target) {
       if (link.text === "about") {
         subMenuEl.style.top = "0px";
