@@ -57,3 +57,7 @@ subMenuEl.style.backgroundColor = "var(--sub-menu-bg)"; // set color
 subMenuEl.classList.add("flex-around"); // add class
 subMenuEl.style.position = "Absolute"; // trying to hide the subMenuEl...
 subMenuEl.style.top = "0px"; //...by moving to top of page...
+
+const topMenuLinks = topMenuEl.querySelectorAll("a");
+
+topMenuEl.addEventListener("click", handleClick);
