@@ -60,4 +60,16 @@ subMenuEl.style.top = "0px"; //...by moving to top of page...
 
 const topMenuLinks = topMenuEl.querySelectorAll("a");
 
+function handleClick(event) {
+  event.preventDefault();
+  if (event.target.tagName !== "A") {
+    return;
+  }
+  console.log(event.target);
+
+  //active element toggle
+  topMenuLinks.forEach((link) => link.classList.remove("active"));
+  event.target.classList.toggle("active");
+}
+
 topMenuEl.addEventListener("click", handleClick);
