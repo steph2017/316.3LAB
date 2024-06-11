@@ -67,33 +67,41 @@ function handleClick(event) {
   }
   console.log(event.target);
 
-  //active element toggle
-  topMenuLinks.forEach((link) => {
-    //adding helper function here?
-    function subMenuBuilder(sublinkArr) {
-      //creating function in function
-      sublinkArr.forEach((sublink) => {
-        const subAnchor = subMenuEl.createElement("a");
-        subAnchor.setAttribute("href", sublink.href);
-        anchor.textContent = sublink.text;
+  //adding helper function here?
+  function subMenuBuilder(sublinkArr) {
+    subMenuEl.innerHTML = ""; //clear text
+    if (sublinkArr) {
+      // handles "about" case
+      sublinkArr.forEach((subLink) => {
+        const subAnchor = document.createElement("a");
+        subAnchor.setAttribute("href", subLink.href);
+        subAnchor.textContent = subLink.text;
         subMenuEl.appendChild(subAnchor);
       });
+      subMenuEl.style.top = "100%";
+    } else {
+      subMenuEl.style.top = "0px";
     }
+  }
 
-    if (link === event.target) {
-      if (link.text === "about") {
-        subMenuEl.style.top = "0px";
-        link.classList.toggle("active");
+  //load relevant sublinks
+  const myLink = menuLinks.find(
+    (link) => link.text === event.target.textContent,
+  );
+
+  //active element toggle
+  topMenuLinks.forEach((link) => {
+    if (link === event.target && myLink.subLinks) {
+      if (link.classList.contains("active")) {
+        link.classList.remove("active");
+        subMenuBuilder(null);
       } else {
-        if (link.classList.contains("active")) {
-          subMenuEl.style.top = "0px";
-          link.classList.toggle("active");
-        } else {
-          subMenuEl.style.top = "100%";
-          link.classList.toggle("active");
-          subMenuBuilder(link.subLinks);
-        }
+        link.classList.add("active");
+        subMenuBuilder(myLink.subLinks);
       }
+    } else if (link === event.target && !myLink.subLinks) {
+      link.classList.toggle("active");
+      subMenuBuilder(null);
     } else {
       link.classList.remove("active");
     }
